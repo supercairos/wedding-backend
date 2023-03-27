@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "controllers",
+    srcs = [
+        "item.go",
+        "transaction.go",
+    ],
+    importpath = "github.com/supercairos/wedding-backend/wishlist/controllers",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//wishlist/models",
+        "@com_github_gin_gonic_gin//:gin",
+        "@com_github_gin_gonic_gin//binding",
+        "@in_gopkg_guregu_null_v4//:null_v4",
+        "@org_uber_go_zap//:zap",
+    ],
+)

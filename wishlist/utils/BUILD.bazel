@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "utils",
+    srcs = [
+        "sql.go",
+        "utils.go",
+    ],
+    importpath = "github.com/supercairos/wedding-backend/wishlist/utils",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_go_sql_driver_mysql//:mysql",
+        "@com_github_jmoiron_sqlx//:sqlx",
+        "@in_gopkg_guregu_null_v4//:null_v4",
+        "@org_uber_go_zap//:zap",
+    ],
+)

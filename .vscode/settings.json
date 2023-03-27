@@ -1,0 +1,33 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/CVS": true,
+    "**/Thumbs.db": true,
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.hg/store/**": true,
+    "**/node_modules/*/**": true,
+    "bazel-bin/**": true,
+    "bazel-vd-backend/**": true,
+    "bazel-out/**": true,
+    "bazel-testlogs/**": true
+  },
+  "git.ignoreLimitWarning": true,
+  "search.exclude": {
+    "**/*.code-search": true,
+    "**/bower_components": true,
+    "**/node_modules": true,
+    "bazel-bin/**": true,
+    "bazel-vd-backend/**": true,
+    "bazel-out/**": true,
+    "bazel-testlogs/**": true
+  },
+}

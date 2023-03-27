@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "routes",
+    srcs = ["item.go"],
+    importpath = "github.com/supercairos/wedding-backend/wishlist/routes",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//wishlist/controllers",
+        "//wishlist/models/sql",
+        "@com_github_gin_gonic_gin//:gin",
+        "@com_github_jmoiron_sqlx//:sqlx",
+        "@org_uber_go_zap//:zap",
+    ],
+)

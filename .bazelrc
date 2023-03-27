@@ -1,0 +1,15 @@
+# A more useful default output mode for bazel query, which
+# prints "ng_module rule //foo:bar" instead of just "//foo:bar".
+query --output=label_kind
+
+# By default, failing tests don't print any output, it's logged to a
+# file instead.
+test --test_output=errors
+build --verbose_failures
+
+# Setup bazel workspace status command to get the current git commit
+build --workspace_status_command="python3 tools/scripts/get_workspace_status.py"
+run --workspace_status_command="python3 tools/scripts/get_workspace_status.py"
+
+# Setup bazel coverage
+coverage --combined_report=lcov

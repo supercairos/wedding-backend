@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "models",
+    srcs = [
+        "errors.go",
+        "item.go",
+        "transaction.go",
+    ],
+    importpath = "github.com/supercairos/wedding-backend/wishlist/models",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//wishlist/utils",
+        "@in_gopkg_guregu_null_v4//:null_v4",
+    ],
+)
