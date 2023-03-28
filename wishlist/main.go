@@ -27,28 +27,16 @@ func main() {
 		return
 	}
 
-	// Add a ginzap middleware, which:
-	//   - Logs all requests, like a combined access and error log.
-	//   - Logs to stdout.
-	//   - RFC3339 with UTC time format.
 	r := gin.New()
-	r.UseH2C = true
-
 	r.SetTrustedProxies(nil)
 
-	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:8080"}
-	r.Use(cors.New(config))
-
+	r.Use(cors.Default())
 	r.Use(ginzap.Ginzap(logger, time.RFC3339, true))
-
-	// Logs all panic to error log
-	//   - stack means whether output the stack info.
 	r.Use(ginzap.RecoveryWithZap(logger, true))
 
 	r.GET("/ping", func(c *gin.Context) {
 		logger.Info("http ping")
-		c.String(http.StatusOK, "pong")
+		c.String(http.StatusOK, `{"message": "pong"}`)
 	})
 
 	err = routes.NewItemRoutes(r, logger, db)

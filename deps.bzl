@@ -33,6 +33,13 @@ def go_dependencies():
         version = "v1.1.1",
     )
     go_repository(
+        name = "com_github_gin_contrib_cors",
+        importpath = "github.com/gin-contrib/cors",
+        sum = "h1:oJ6gwtUl3lqV0WEIwM/LxPF1QZ5qe2lGWdY2+bz7y0g=",
+        version = "v1.4.0",
+    )
+
+    go_repository(
         name = "com_github_gin_contrib_sse",
         importpath = "github.com/gin-contrib/sse",
         sum = "h1:Y/yl/+YNO8GZSjAhjMsSuLt29uWRFHdHYUb5lYOV9qE=",

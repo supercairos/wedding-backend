@@ -23,21 +23,20 @@ func NewItemRoutes(gin *gin.Engine, logger *zap.Logger, db *sqlx.DB) error {
 	itemCtrl := controllers.NewItemController(is, ts)
 	transactionCtrl := controllers.NewTransactionController(ts)
 
-	group := gin.Group("/items")
 	// GET ITEM
-	group.GET("/", itemCtrl.GetAll(logger))
-	group.GET("/:item_id", itemCtrl.GetByID(logger))
+	gin.GET("/items", itemCtrl.GetAll(logger))
+	gin.GET("/items/:item_id", itemCtrl.GetByID(logger))
 	// CREATE ITEM
-	group.POST("/", itemCtrl.Post(logger))
+	gin.POST("/items", itemCtrl.Post(logger))
 	// UPDATE ITEM
-	group.PUT("/:item_id", itemCtrl.Put(logger))
+	gin.PUT("/items/:item_id", itemCtrl.Put(logger))
 	// DELETE ITEM
-	group.DELETE("/:item_id", itemCtrl.Delete(logger))
+	gin.DELETE("/items/:item_id", itemCtrl.Delete(logger))
 
 	// GET TRANSACTION
-	group.GET("/:item_id/transactions", transactionCtrl.GetAll(logger))
+	gin.GET("/items/:item_id/transactions", transactionCtrl.GetAll(logger))
 	// POST TRANSACTION
-	group.POST("/:item_id/transactions", transactionCtrl.Post(logger))
+	gin.POST("/items/:item_id/transactions", transactionCtrl.Post(logger))
 
 	return nil
 }
