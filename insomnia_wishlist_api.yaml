@@ -1,0 +1,256 @@
+_type: export
+__export_format: 4
+__export_date: 2023-03-28T11:47:33.873Z
+__export_source: insomnia.desktop.app:v2022.7.5
+resources:
+  - _id: req_9c2111b2a3c14ad79cec27534732b3d9
+    parentId: wrk_5eb2922cf0d54738a37826abebd248b4
+    modified: 1680004000638
+    created: 1680003982460
+    url: "{{ _.base_url }}/ping"
+    name: Ping
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1680003982460
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_5eb2922cf0d54738a37826abebd248b4
+    parentId: null
+    modified: 1679929788825
+    created: 1679929788825
+    name: WishList
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_73004e754346481ab813db3ad2022f83
+    parentId: fld_1ca37334e560481e9d2ba5b94c86db8d
+    modified: 1679961055734
+    created: 1679954951796
+    url: "{{ _.base_url }}/items/1/transactions"
+    name: Get All By Item ID
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1679954951796
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_1ca37334e560481e9d2ba5b94c86db8d
+    parentId: wrk_5eb2922cf0d54738a37826abebd248b4
+    modified: 1679954941177
+    created: 1679954941177
+    name: transactions
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1679954941177
+    _type: request_group
+  - _id: req_b79255cd6b494dc891b9041472e1731b
+    parentId: fld_1ca37334e560481e9d2ba5b94c86db8d
+    modified: 1679959607247
+    created: 1679954993390
+    url: "{{ _.base_url }}/items/5/transactions"
+    name: Add Amount to Item
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"amount": 3.45,
+        	"paypal_tx_id": "{% faker 'word', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'fr' %}"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1679954951746
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_17bedc96659d4809b3b9d2640c610189
+    parentId: fld_74fd4f9876654063a91d277ee4f56f96
+    modified: 1679932255768
+    created: 1679931315269
+    url: "{{ _.base_url }}/items"
+    name: Get All
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1679931331033.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_74fd4f9876654063a91d277ee4f56f96
+    parentId: wrk_5eb2922cf0d54738a37826abebd248b4
+    modified: 1679954946268
+    created: 1679931333286
+    name: items
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1679930392870.8281
+    _type: request_group
+  - _id: req_fc45655bd855460481983f7870ed9465
+    parentId: fld_74fd4f9876654063a91d277ee4f56f96
+    modified: 1679933113279
+    created: 1679929830053
+    url: "{{ _.base_url }}/items/1"
+    name: Get By Id
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1679931331030.75
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_2c261749a495404083b2ef8f33cf08f6
+    parentId: fld_74fd4f9876654063a91d277ee4f56f96
+    modified: 1679932041505
+    created: 1679931371461
+    url: "{{ _.base_url }}/items"
+    name: Create
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"name": "{% faker 'vehicle', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'en' %}",
+        	"price": {% faker 'finance', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'en' %},
+        	"picture_url": "{% faker 'image', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'en' %}"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1679931331027.625
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_e9b577bc927448d28c2ed319942e285a
+    parentId: fld_74fd4f9876654063a91d277ee4f56f96
+    modified: 1679933188199
+    created: 1679931381263
+    url: "{{ _.base_url }}/items/1"
+    name: Update
+    description: ""
+    method: PUT
+    body:
+      mimeType: application/json
+      text: >-
+        {
+        	"name": "{% faker 'vehicle', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'en' %}",
+        	"price": {% faker 'finance', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'fr' %},
+        	"picture_url": "{% faker 'image', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'en' %}"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1679931331021.375
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_689326972ecd41d5aff26fafb5bee72b
+    parentId: fld_74fd4f9876654063a91d277ee4f56f96
+    modified: 1679956567349
+    created: 1679931386622
+    url: "{{ _.base_url }}/items/2"
+    name: Delete
+    description: ""
+    method: DELETE
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1679931331008.875
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_514c09e02c33c6c27af254885360981d0c6cbb4e
+    parentId: wrk_5eb2922cf0d54738a37826abebd248b4
+    modified: 1679929825628
+    created: 1679929788828
+    name: Base Environment
+    data:
+      base_url: http://localhost:1337
+    dataPropertyOrder:
+      "&":
+        - base_url
+    color: null
+    isPrivate: false
+    metaSortKey: 1679929788828
+    _type: environment
+  - _id: jar_514c09e02c33c6c27af254885360981d0c6cbb4e
+    parentId: wrk_5eb2922cf0d54738a37826abebd248b4
+    modified: 1679929788829
+    created: 1679929788829
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_795986dff20945c68bfc39a5bb62567d
+    parentId: wrk_5eb2922cf0d54738a37826abebd248b4
+    modified: 1679929788825
+    created: 1679929788825
+    fileName: WishList
+    contents: ""
+    contentType: yaml
+    _type: api_spec

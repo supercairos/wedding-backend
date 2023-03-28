@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -30,6 +31,9 @@ func main() {
 	//   - Logs to stdout.
 	//   - RFC3339 with UTC time format.
 	r := gin.New()
+
+	r.SetTrustedProxies(nil)
+
 	r.Use(ginzap.Ginzap(logger, time.RFC3339, true))
 
 	// Logs all panic to error log
@@ -47,8 +51,11 @@ func main() {
 		return
 	}
 
-	err = r.Run(":1337") // listen and serve on 0.0.0.0:1337
+	port := utils.GetEnv("PORT", "1337")
+	err = r.Run(fmt.Sprintf(":%s", port)) // listen and serve on 0.0.0.0:1337
 	if err != nil {
 		logger.Fatal("Failed to start server", zap.Error(err))
 	}
+
+	logger.Info("Server started", zap.String("port", port))
 }
