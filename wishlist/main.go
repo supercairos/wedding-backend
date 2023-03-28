@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/gin-contrib/cors"
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
 	"github.com/supercairos/wedding-backend/wishlist/routes"
@@ -34,6 +35,10 @@ func main() {
 	r.UseH2C = true
 
 	r.SetTrustedProxies(nil)
+
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:8080"}
+	r.Use(cors.New(config))
 
 	r.Use(ginzap.Ginzap(logger, time.RFC3339, true))
 
