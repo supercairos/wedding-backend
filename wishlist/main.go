@@ -31,6 +31,7 @@ func main() {
 	//   - Logs to stdout.
 	//   - RFC3339 with UTC time format.
 	r := gin.New()
+	r.UseH2C = true
 
 	r.SetTrustedProxies(nil)
 
