@@ -3,6 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "utils",
     srcs = [
+        "sendinblue.go",
         "sql.go",
         "utils.go",
     ],
@@ -11,6 +12,7 @@ go_library(
     deps = [
         "@com_github_go_sql_driver_mysql//:mysql",
         "@com_github_jmoiron_sqlx//:sqlx",
+        "@com_github_sendinblue_apiv3_go_library_v2//lib",
         "@in_gopkg_guregu_null_v4//:null_v4",
         "@org_uber_go_zap//:zap",
     ],

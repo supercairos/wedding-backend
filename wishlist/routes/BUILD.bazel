@@ -2,14 +2,21 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 
 go_library(
     name = "routes",
-    srcs = ["item.go"],
+    srcs = [
+        "email.go",
+        "item.go",
+        "transaction.go",
+    ],
     importpath = "github.com/supercairos/wedding-backend/wishlist/routes",
     visibility = ["//visibility:public"],
     deps = [
         "//wishlist/controllers",
+        "//wishlist/models/sendinblue",
         "//wishlist/models/sql",
+        "//wishlist/routes/middlewares",
         "@com_github_gin_gonic_gin//:gin",
         "@com_github_jmoiron_sqlx//:sqlx",
+        "@com_github_sendinblue_apiv3_go_library_v2//lib",
         "@org_uber_go_zap//:zap",
     ],
 )

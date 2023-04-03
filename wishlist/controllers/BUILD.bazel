@@ -3,6 +3,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_library")
 go_library(
     name = "controllers",
     srcs = [
+        "email.go",
         "item.go",
         "transaction.go",
     ],

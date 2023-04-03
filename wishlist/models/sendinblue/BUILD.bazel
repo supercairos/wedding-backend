@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "sendinblue",
+    srcs = ["email.go"],
+    importpath = "github.com/supercairos/wedding-backend/wishlist/models/sendinblue",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//wishlist/models",
+        "//wishlist/utils",
+        "@com_github_sendinblue_apiv3_go_library_v2//lib",
+        "@org_uber_go_zap//:zap",
+    ],
+)

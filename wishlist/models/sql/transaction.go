@@ -6,12 +6,14 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/supercairos/wedding-backend/wishlist/models"
 	"github.com/supercairos/wedding-backend/wishlist/utils"
+	"go.uber.org/zap"
 )
 
 // TransactionService is the implementation of the item data mapping layer
 // using SQL.
 type TransactionService struct {
 	conn *sqlx.DB
+	log  *zap.Logger
 }
 
 // Check it implements the interface
@@ -19,7 +21,7 @@ var _ models.TransactionService = &TransactionService{}
 
 // NewPersonService creates the person service using the given
 // connection pool to a postgres DB.
-func NewTransactionService(conn *sqlx.DB) (*TransactionService, error) {
+func NewTransactionService(logger *zap.Logger, conn *sqlx.DB) (*TransactionService, error) {
 	_, err := conn.Exec(`
 CREATE TABLE IF NOT EXISTS transactions (
 	id           SERIAL PRIMARY KEY,
@@ -34,7 +36,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 		return nil, err
 	}
 
-	return &TransactionService{conn: conn}, nil
+	return &TransactionService{conn: conn, log: logger}, nil
 }
 
 // Create will try to add the person to the DB.

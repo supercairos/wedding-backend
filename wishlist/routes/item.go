@@ -5,38 +5,28 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/supercairos/wedding-backend/wishlist/controllers"
 	"github.com/supercairos/wedding-backend/wishlist/models/sql"
+	"github.com/supercairos/wedding-backend/wishlist/routes/middlewares"
 	"go.uber.org/zap"
 )
 
 // NewItemRoutes returns a new router for the item resource.
 func NewItemRoutes(gin *gin.Engine, logger *zap.Logger, db *sqlx.DB) error {
-	is, err := sql.NewItemService(db)
+	is, err := sql.NewItemService(logger, db)
 	if err != nil {
 		return err
 	}
 
-	ts, err := sql.NewTransactionService(db)
-	if err != nil {
-		return err
-	}
-
-	itemCtrl := controllers.NewItemController(is, ts)
-	transactionCtrl := controllers.NewTransactionController(ts)
+	itemCtrl := controllers.NewItemController(is)
 
 	// GET ITEM
 	gin.GET("/items", itemCtrl.GetAll(logger))
 	gin.GET("/items/:item_id", itemCtrl.GetByID(logger))
 	// CREATE ITEM
-	gin.POST("/items", itemCtrl.Post(logger))
+	gin.POST("/items", middlewares.BasicAuth(logger), itemCtrl.Post(logger))
 	// UPDATE ITEM
-	gin.PUT("/items/:item_id", itemCtrl.Put(logger))
+	gin.PUT("/items/:item_id", middlewares.BasicAuth(logger), itemCtrl.Put(logger))
 	// DELETE ITEM
-	gin.DELETE("/items/:item_id", itemCtrl.Delete(logger))
-
-	// GET TRANSACTION
-	gin.GET("/items/:item_id/transactions", transactionCtrl.GetAll(logger))
-	// POST TRANSACTION
-	gin.POST("/items/:item_id/transactions", transactionCtrl.Post(logger))
+	gin.DELETE("/items/:item_id", middlewares.BasicAuth(logger), itemCtrl.Delete(logger))
 
 	return nil
 }

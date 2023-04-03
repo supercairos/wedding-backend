@@ -27,6 +27,12 @@ func main() {
 		return
 	}
 
+	sib, err := utils.NewSibClient(logger)
+	if err != nil {
+		logger.Fatal("Failed to connect to sendinblue", zap.Error(err))
+		return
+	}
+
 	r := gin.New()
 	r.SetTrustedProxies(nil)
 
@@ -42,6 +48,18 @@ func main() {
 	err = routes.NewItemRoutes(r, logger, db)
 	if err != nil {
 		logger.Fatal("Failed to create items routes", zap.Error(err))
+		return
+	}
+
+	err = routes.NewTransactionRoutes(r, logger, db)
+	if err != nil {
+		logger.Fatal("Failed to create transactions routes", zap.Error(err))
+		return
+	}
+
+	err = routes.NewEmailRoute(r, logger, sib)
+	if err != nil {
+		logger.Fatal("Failed to create email routes", zap.Error(err))
 		return
 	}
 

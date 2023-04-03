@@ -6,6 +6,7 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/supercairos/wedding-backend/wishlist/models"
 	"github.com/supercairos/wedding-backend/wishlist/utils"
+	"go.uber.org/zap"
 	"gopkg.in/guregu/null.v4"
 )
 
@@ -13,6 +14,7 @@ import (
 // using SQL.
 type ItemService struct {
 	conn *sqlx.DB
+	log  *zap.Logger
 }
 
 // Check it implements the interface
@@ -20,7 +22,7 @@ var _ models.ItemService = &ItemService{}
 
 // NewPersonService creates the person service using the given
 // connection pool to a postgres DB.
-func NewItemService(conn *sqlx.DB) (*ItemService, error) {
+func NewItemService(logger *zap.Logger, conn *sqlx.DB) (*ItemService, error) {
 	_, err := conn.Exec(`
 CREATE TABLE IF NOT EXISTS items (
 	id          SERIAL PRIMARY KEY,
@@ -35,7 +37,7 @@ CREATE TABLE IF NOT EXISTS items (
 		return nil, err
 	}
 
-	return &ItemService{conn: conn}, nil
+	return &ItemService{conn: conn, log: logger}, nil
 }
 
 // Create will try to add the person to the DB.

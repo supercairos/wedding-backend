@@ -12,16 +12,14 @@ import (
 
 // Item provides the handlers for the Item entity.
 type ItemController struct {
-	ItemService        models.ItemService
-	TransactionService models.TransactionService
+	ItemService models.ItemService
 }
 
 // NewItem creates the controller using the given data mapper for
 // Items.
-func NewItemController(is models.ItemService, ts models.TransactionService) *ItemController {
+func NewItemController(is models.ItemService) *ItemController {
 	return &ItemController{
-		ItemService:        is,
-		TransactionService: ts,
+		ItemService: is,
 	}
 }
 

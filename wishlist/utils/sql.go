@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"os"
 	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -12,7 +11,7 @@ import (
 // NewSQL creates and SQL connection using environment variables
 // to configure.
 func NewSqlConnection(logger *zap.Logger) (*sqlx.DB, error) {
-	dsn := strings.TrimSpace(os.Getenv("DSN"))
+	dsn := strings.TrimSpace(GetEnv("DSN", "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable"))
 	logger.Info("connecting to database", zap.String("info", dsn))
 	conn, err := sqlx.Connect("mysql", dsn)
 	if err != nil {
