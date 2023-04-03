@@ -16,12 +16,12 @@ func NewTransactionRoutes(gin *gin.Engine, logger *zap.Logger, db *sqlx.DB) erro
 		return err
 	}
 
-	transactionCtrl := controllers.NewTransactionController(ts)
+	transactionCtrl := controllers.NewTransactionController(logger, ts)
 
 	// GET TRANSACTION
-	gin.GET("/items/:item_id/transactions", middlewares.BasicAuth(logger), transactionCtrl.GetAll(logger))
+	gin.GET("/items/:item_id/transactions", middlewares.BasicAuth(logger), transactionCtrl.GetAll)
 	// POST TRANSACTION
-	gin.POST("/items/:item_id/transactions", transactionCtrl.Post(logger))
+	gin.POST("/items/:item_id/transactions", transactionCtrl.Post)
 
 	return nil
 }

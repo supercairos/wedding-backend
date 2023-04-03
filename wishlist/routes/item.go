@@ -16,17 +16,17 @@ func NewItemRoutes(gin *gin.Engine, logger *zap.Logger, db *sqlx.DB) error {
 		return err
 	}
 
-	itemCtrl := controllers.NewItemController(is)
+	itemCtrl := controllers.NewItemController(logger, is)
 
 	// GET ITEM
-	gin.GET("/items", itemCtrl.GetAll(logger))
-	gin.GET("/items/:item_id", itemCtrl.GetByID(logger))
+	gin.GET("/items", itemCtrl.GetAll)
+	gin.GET("/items/:item_id", itemCtrl.GetByID)
 	// CREATE ITEM
-	gin.POST("/items", middlewares.BasicAuth(logger), itemCtrl.Post(logger))
+	gin.POST("/items", middlewares.BasicAuth(logger), itemCtrl.Post)
 	// UPDATE ITEM
-	gin.PUT("/items/:item_id", middlewares.BasicAuth(logger), itemCtrl.Put(logger))
+	gin.PUT("/items/:item_id", middlewares.BasicAuth(logger), itemCtrl.Put)
 	// DELETE ITEM
-	gin.DELETE("/items/:item_id", middlewares.BasicAuth(logger), itemCtrl.Delete(logger))
+	gin.DELETE("/items/:item_id", middlewares.BasicAuth(logger), itemCtrl.Delete)
 
 	return nil
 }

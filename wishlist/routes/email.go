@@ -15,10 +15,10 @@ func NewEmailRoute(gin *gin.Engine, logger *zap.Logger, sib *siblib.APIClient) e
 		return err
 	}
 
-	emailCtrl := controllers.NewEmailController(es)
+	emailCtrl := controllers.NewEmailController(logger, es)
 
 	// SEND EMAIL
-	gin.POST("/email", emailCtrl.Send(logger))
+	gin.POST("/email", emailCtrl.Send)
 
 	return nil
 }
