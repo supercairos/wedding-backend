@@ -29,6 +29,8 @@ CREATE TABLE IF NOT EXISTS items (
 	created_at  TIMESTAMP NOT NULL DEFAULT NOW(),
 	updated_at  TIMESTAMP NOT NULL DEFAULT NOW(),
 	name	    TEXT NOT NULL,
+	paypal_id   TEXT NOT NULL,
+	paypal_env  TEXT NOT NULL,
 	price	    FLOAT(12, 2) NOT NULL,
 	picture_url TEXT
 );
@@ -43,13 +45,15 @@ CREATE TABLE IF NOT EXISTS items (
 // Create will try to add the person to the DB.
 func (s *ItemService) Create(item *models.Item) (*models.DatabaseItem, error) {
 	q_insert := `
-INSERT INTO items(name, price, picture_url)
+INSERT INTO items(name, price, paypal_id, paypal_env, picture_url)
 VALUES (?,?,?);`
 
 	result, err := s.conn.Exec(
 		q_insert,
 		item.Name,
 		item.Price,
+		item.PaypalId,
+		item.PaypalEnv,
 		null.StringFromPtr(item.PictureUrl),
 	)
 	if err != nil {
@@ -93,6 +97,8 @@ UPDATE items
 SET updated_at = NOW(),
     name = ?,
 	price = ?,
+	paypal_id = ?,
+	paypal_env = ?
 	picture_url = ?
 WHERE id = ?;`
 
@@ -100,6 +106,8 @@ WHERE id = ?;`
 		q,
 		p.Name,
 		p.Price,
+		p.PaypalId,
+		p.PaypalEnv,
 		p.PictureUrl,
 		p.ID,
 	)

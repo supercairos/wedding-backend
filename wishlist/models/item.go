@@ -11,6 +11,8 @@ type Item struct {
 	ID         string  `form:"id" json:"id" binding:"omitempty"`
 	Name       string  `form:"name" json:"name" binding:"required"`
 	Price      float64 `form:"price" json:"price" binding:"required"`
+	PaypalId   string  `form:"paypal_id" json:"paypal_tx_id" binding:"required"`
+	PaypalEnv  string  `form:"paypal_env" json:"paypal_env" binding:"required"`
 	PictureUrl *string `form:"picture_url" json:"picture_url" binding:"omitempty"`
 	Raised     float64 `form:"raised" json:"raised" binding:"omitempty"`
 }
@@ -23,6 +25,8 @@ type DatabaseItem struct {
 	UpdatedAt  time.Time   `db:"updated_at"`
 	Name       string      `db:"name"`
 	Price      float64     `db:"price"`
+	PaypalId   string      `db:"paypal_id"`
+	PaypalEnv  string      `db:"paypal_env"`
 	PictureUrl null.String `db:"picture_url"`
 	Raised     null.Float  `db:"raised"`
 }
@@ -41,6 +45,8 @@ func ToItem(i *DatabaseItem) *Item {
 		ID:         i.ID,
 		Name:       i.Name,
 		Price:      i.Price,
+		PaypalId:   i.PaypalId,
+		PaypalEnv:  i.PaypalEnv,
 		PictureUrl: i.PictureUrl.Ptr(),
 		Raised:     utils.ToFloatValue(i.Raised),
 	}
