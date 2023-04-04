@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS items (
 func (s *ItemService) Create(item *models.Item) (*models.DatabaseItem, error) {
 	q_insert := `
 INSERT INTO items(name, price, paypal_id, paypal_env, picture_url)
-VALUES (?,?,?);`
+VALUES (?,?,?,?,?);`
 
 	result, err := s.conn.Exec(
 		q_insert,

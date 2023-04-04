@@ -11,7 +11,7 @@ type Item struct {
 	ID         string  `form:"id" json:"id" binding:"omitempty"`
 	Name       string  `form:"name" json:"name" binding:"required"`
 	Price      float64 `form:"price" json:"price" binding:"required"`
-	PaypalId   string  `form:"paypal_id" json:"paypal_tx_id" binding:"required"`
+	PaypalId   string  `form:"paypal_id" json:"paypal_id" binding:"required"`
 	PaypalEnv  string  `form:"paypal_env" json:"paypal_env" binding:"required"`
 	PictureUrl *string `form:"picture_url" json:"picture_url" binding:"omitempty"`
 	Raised     float64 `form:"raised" json:"raised" binding:"omitempty"`
