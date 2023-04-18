@@ -6,6 +6,7 @@ go_library(
         "email.go",
         "errors.go",
         "item.go",
+        "startup.go",
         "transaction.go",
     ],
     importpath = "github.com/supercairos/wedding-backend/wishlist/models",

@@ -3,7 +3,6 @@ package sendinblue
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	sendinblue "github.com/sendinblue/APIv3-go-library/v2/lib"
 	"github.com/supercairos/wedding-backend/wishlist/models"
@@ -55,14 +54,10 @@ func (s *EmailService) Send(email *models.Email) error {
 		sendinblue.SendSmtpEmail{
 			To: to,
 			Sender: &sendinblue.SendSmtpEmailSender{
-				Email: email.From.Email,
-				Name:  email.From.Name,
+				Email: "wedding@clarisseetromain.fr",
+				Name:  "Mariage Clarisse & Romain",
 			},
-			ReplyTo: &sendinblue.SendSmtpEmailReplyTo{
-				Email: email.From.Email,
-				Name:  email.From.Name,
-			},
-			Subject:     fmt.Sprintf("[Wedding Website] %s", email.Subject),
+			Subject:     "[Wedding Website] Nouveau Message",
 			TextContent: email.Body,
 		},
 	)

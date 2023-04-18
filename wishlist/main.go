@@ -8,6 +8,7 @@ import (
 	"github.com/gin-contrib/cors"
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
+	"github.com/supercairos/wedding-backend/wishlist/models/sql"
 	"github.com/supercairos/wedding-backend/wishlist/routes"
 	"github.com/supercairos/wedding-backend/wishlist/utils"
 	"go.uber.org/zap"
@@ -30,6 +31,18 @@ func main() {
 	sib, err := utils.NewSibClient(logger)
 	if err != nil {
 		logger.Fatal("Failed to connect to sendinblue", zap.Error(err))
+		return
+	}
+
+	ss, err := sql.NewStartupService(logger, db)
+	if err != nil {
+		logger.Fatal("Failed to create startup service", zap.Error(err))
+		return
+	}
+
+	err = ss.Create()
+	if err != nil {
+		logger.Fatal("Failed to create startup entry", zap.Error(err))
 		return
 	}
 

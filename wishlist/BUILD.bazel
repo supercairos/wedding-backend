@@ -6,6 +6,7 @@ go_library(
     importpath = "github.com/supercairos/wedding-backend/wishlist",
     visibility = ["//visibility:private"],
     deps = [
+        "//wishlist/models/sql",
         "//wishlist/routes",
         "//wishlist/utils",
         "@com_github_gin_contrib_cors//:cors",

@@ -98,7 +98,7 @@ SET updated_at = NOW(),
     name = ?,
 	price = ?,
 	paypal_id = ?,
-	paypal_env = ?
+	paypal_env = ?,
 	picture_url = ?
 WHERE id = ?;`
 
