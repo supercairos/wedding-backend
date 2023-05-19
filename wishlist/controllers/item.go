@@ -97,11 +97,12 @@ func (p *ItemController) Put(c *gin.Context) {
 
 	item, err = p.ItemService.Update(&models.DatabaseItem{
 		ID:         item.ID,
-		CreatedAt:  item.CreatedAt,
-		UpdatedAt:  item.UpdatedAt,
 		Name:       data.Name,
 		Price:      data.Price,
+		PaypalId:   data.PaypalId,
+		PaypalEnv:  data.PaypalEnv,
 		PictureUrl: null.StringFromPtr(data.PictureUrl),
+		Ranking:    null.IntFromPtr(data.Ranking),
 	})
 	if err != nil {
 		c.Error(err)

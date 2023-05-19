@@ -32,7 +32,8 @@ CREATE TABLE IF NOT EXISTS items (
 	paypal_id   TEXT NOT NULL,
 	paypal_env  TEXT NOT NULL,
 	price	    FLOAT(12, 2) NOT NULL,
-	picture_url TEXT
+	picture_url TEXT,
+	ranking		INTEGER DEFAULT 2147483647
 );
 `)
 	if err != nil {
@@ -45,8 +46,8 @@ CREATE TABLE IF NOT EXISTS items (
 // Create will try to add the person to the DB.
 func (s *ItemService) Create(item *models.Item) (*models.DatabaseItem, error) {
 	q_insert := `
-INSERT INTO items(name, price, paypal_id, paypal_env, picture_url)
-VALUES (?,?,?,?,?);`
+INSERT INTO items(name, price, paypal_id, paypal_env, picture_url, ranking)
+VALUES (?,?,?,?,?,?);`
 
 	result, err := s.conn.Exec(
 		q_insert,
@@ -55,6 +56,7 @@ VALUES (?,?,?,?,?);`
 		item.PaypalId,
 		item.PaypalEnv,
 		null.StringFromPtr(item.PictureUrl),
+		null.IntFromPtr(item.Ranking),
 	)
 	if err != nil {
 		return nil, err
@@ -99,7 +101,8 @@ SET updated_at = NOW(),
 	price = ?,
 	paypal_id = ?,
 	paypal_env = ?,
-	picture_url = ?
+	picture_url = ?,
+	ranking = ?
 WHERE id = ?;`
 
 	result, err := s.conn.Exec(
@@ -109,6 +112,7 @@ WHERE id = ?;`
 		p.PaypalId,
 		p.PaypalEnv,
 		p.PictureUrl,
+		p.Ranking,
 		p.ID,
 	)
 	if err != nil {
@@ -153,7 +157,8 @@ SELECT *, (
 	WHERE transactions.item_id = items.id
 	GROUP BY transactions.item_id
 ) AS raised 
-FROM items;`
+FROM items
+ORDER BY ranking;`
 
 	var output []*models.DatabaseItem
 	err := s.conn.Select(

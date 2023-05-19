@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS transactions (
 	updated_at   TIMESTAMP NOT NULL DEFAULT NOW(),
 	item_id	     TEXT NOT NULL,
 	amount	     FLOAT(12, 2) NOT NULL,
-	paypal_tx_id TEXT NOT NULL
+	paypal_tx_id TEXT DEFAULT NULL
 );
 `)
 	if err != nil {

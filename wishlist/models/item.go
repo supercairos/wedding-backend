@@ -15,6 +15,7 @@ type Item struct {
 	PaypalEnv  string   `form:"paypal_env" json:"paypal_env"`
 	PictureUrl *string  `form:"picture_url" json:"picture_url" binding:"omitempty"`
 	Raised     float64  `form:"raised" json:"raised" binding:"omitempty"`
+	Ranking    *int64   `form:"ranking" json:"ranking" binding:"omitempty"`
 }
 
 // Item is the public data that should hide the SQL implementation
@@ -29,6 +30,7 @@ type DatabaseItem struct {
 	PaypalEnv  string      `db:"paypal_env"`
 	PictureUrl null.String `db:"picture_url"`
 	Raised     null.Float  `db:"raised"`
+	Ranking    null.Int    `db:"ranking"`
 }
 
 func ToItems(i []*DatabaseItem) []*Item {
@@ -49,6 +51,7 @@ func ToItem(i *DatabaseItem) *Item {
 		PaypalEnv:  i.PaypalEnv,
 		PictureUrl: i.PictureUrl.Ptr(),
 		Raised:     utils.ToFloatValue(i.Raised),
+		Ranking:    i.Ranking.Ptr(),
 	}
 }
 
